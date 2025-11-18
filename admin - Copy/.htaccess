@@ -1,0 +1,18 @@
+# Protect admin directory
+# Allow access only to admin users through PHP session checks
+
+# Prevent directory listing
+Options -Indexes
+
+# Additional security headers
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Protect sensitive files
+<FilesMatch "\.(sql|log|md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
